@@ -10,25 +10,27 @@ class ProfilsController < ApplicationController
   end
 
   def new
-    @profil = Profil.new
+    @profile = Profil.new
+    @interest = @profile.interests.new
   end
 
   def create
-    @profil = Profil.new(profil_params)
+    @profile = Profil.new(profil_params)
     # link new profil to current user
-    @profil.user_id = current_user.id
-    return redirect_to pages_dashboard_path if @profil.save
-
+    @profile.user_id = current_user.id
+    if @profile.save
+      return redirect_to pages_dashboard_path
+    end
     render new, status: :unprocessable_entity
   end
 
   def edit
-    @profil = Profil.find(params[:id])
+    @profile = Profil.find(params[:id])
   end
 
   def update
-    @profil = Profil.find(params[:id])
-    return redirect_to pages_dashboard_path if @profil.update(profil_params)
+    @profile = Profil.find(params[:id])
+    return redirect_to pages_dashboard_path if @profile.update(profil_params)
 
     render edit, status: :unprocessable_entity
   end
@@ -36,11 +38,10 @@ class ProfilsController < ApplicationController
   private
 
   def profil_params
-    params.require(:profil).permit(:name, :wohnort)
+    params.require(:profil).permit(:name, :wohnort, interests_attributes:[:interest])
   end
 
   def set_user
     @user = current_user
   end
-
 end

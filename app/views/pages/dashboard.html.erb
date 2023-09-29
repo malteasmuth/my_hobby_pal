@@ -2,7 +2,15 @@
 
   <h1>Das ist dein Dashboard!</h1>
 
+  <% if @user_profile != nil %>
   <h2>Willkommen zurück, <%= @user_profile.name %>!</h2>
+    <h3>Deine Hobbies</h3>
+    <ul>
+    <% @user_profile.interests.each do |interest| %>
+    <li><%= interest.interest %></li>
+    <% end %>
+    </ul>
+  <% end %>
 
   <% if @user_profile %>
     <%= link_to "Daten ändern", edit_profil_path(@user_profile), class: "btn btn-primary" %>

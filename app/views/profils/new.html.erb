@@ -1,7 +1,10 @@
 <h1>Enter your data here!</h1>
 
-<%= simple_form_for @profil do |f| %>
+<%= simple_form_for @profile do |f| %>
   <%= f.input :name %>
   <%= f.input :wohnort %>
-  <%= f.button :submit, "Profil anlegen", class:"btn btn-success" %>
+    <%= f.simple_fields_for :interests do |i| %>
+    <%= i.input :interest %>
+    <% end %>
+  <%= f.submit %>
 <% end %>

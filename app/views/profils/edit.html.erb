@@ -1,10 +1,8 @@
-<div class="container">
-  <div class="card">
-    <h1>Hallo, <%= @profil.name %>, hier kannst du deine Daten ändern.</h1>
-    <%= simple_form_for @profil do |f| %>
-      <%= f.input :name %>
-      <%= f.input :wohnort %>
-      <%= f.button :submit, "Daten ändern", class:"btn btn-success" %>
+  <%= simple_form_for @profile do |f| %>
+  <%= f.input :name %>
+  <%= f.input :wohnort %>
+    <%= f.simple_fields_for :interests do |i| %>
+    <%= i.input :interest %>
     <% end %>
-  </div>
-</div>
+  <%= f.submit %>
+<% end %>
