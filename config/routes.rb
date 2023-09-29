@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'interests/index'
+  get 'interests/new'
+  get 'interests/create'
+  get 'interests/edit'
+  get 'interests/update'
 
   devise_for :users
   devise_scope :user do
@@ -6,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :profils
+  resources :interests
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'pages/view'
