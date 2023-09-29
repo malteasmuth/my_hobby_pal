@@ -38,7 +38,7 @@ class ProfilsController < ApplicationController
   private
 
   def profil_params
-    params.require(:profil).permit(:name, :wohnort, interests_attributes:[:interest])
+    params.require(:profil).permit(:name, :wohnort, interests_attributes:[:name])
   end
 
   def set_user

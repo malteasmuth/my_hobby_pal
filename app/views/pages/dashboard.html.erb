@@ -7,7 +7,7 @@
     <h3>Deine Hobbies</h3>
     <ul>
     <% @user_profile.interests.each do |interest| %>
-    <li><%= interest.interest %></li>
+    <li><%= interest.name %></li>
     <% end %>
     </ul>
   <% end %>
