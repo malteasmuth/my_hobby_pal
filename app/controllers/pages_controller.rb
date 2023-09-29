@@ -5,5 +5,6 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @user_profile = Profil.find_by(user_id: current_user.id)
   end
 end

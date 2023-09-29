@@ -1,3 +1,12 @@
-<h1>Das ist dein Dashboard!</h1>
+<div class="container">
 
-<h2>Willkommen zurück, <%= current_user.username %>!</h2>
+  <h1>Das ist dein Dashboard!</h1>
+
+  <h2>Willkommen zurück, <%= @user_profile.name %>!</h2>
+
+  <% if @user_profile %>
+    <%= link_to "Daten ändern", edit_profil_path(@user_profile), class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to "Neues Profil", new_profil_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
