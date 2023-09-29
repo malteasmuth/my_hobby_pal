@@ -10,11 +10,12 @@
   </head>
 
   <body>
+  <div class="container item-align center">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+    <%= render "shared/navbar" %>
 
     <%= yield %>
-    <%= render "shared/navbar" %>
+  </div>
   </body>
 </html>
