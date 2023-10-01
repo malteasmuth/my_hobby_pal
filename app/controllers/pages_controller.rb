@@ -16,23 +16,31 @@ class PagesController < ApplicationController
 
     @user_profile = Profil.find_by(user_id: current_user.id)
     all_interests = @user_profile.interests
+    possible_pals = []
 
     all_interests.each do |interest|
-      # all interest entries that do NOT belongt @user_profiles
+      # all interest entries that do NOT belong to @user_profiles
       interests = Interest.where(name: interest.name)
                           .where.not(profil_id: @user_profile.id)
       # all unique profiles
       profiles = interests.collect{ |i| i.profil}.uniq
       # all profiles at the samle place
-      profiles_place = profiles.select { |p| p.wohnort == @user_profile.wohnort}
 
-      if profiles_place.empty?
-        pal = profiles.uniq.sample
-      elsif profiles.empty?
-        nil
-      else
-        pal = profiles_place.sample
+      profiles.each do |profil|
+        possible_pals << profil
       end
     end
+
+
+    same_place_profiles = possible_pals.select { |p| p.wohnort == @user_profile.wohnort}
+
+    if same_place_profiles.empty? && possible_pals.empty?
+      nil
+    elsif same_place_profiles.empty?
+      pal = possible_pals.sample
+    else
+      pal = same_place_profiles.sample
+    end
+    raise
   end
 end
