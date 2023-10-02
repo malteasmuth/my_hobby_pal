@@ -13,13 +13,15 @@
     <% end %>
     </ul>
       <% if @pal %>
-       <h2>Dein Kumpel heißt: <%= @pal.name  %></h2>
+      <div class="container">
+        <h2>Dein Kumpel heißt: <%= @pal.name  %> und wohnt in <%= @pal.wohnort  %>!</h2>
+       </div>
     <% end %>
   <% end %>
 
   <% if @user_profile %>
     <%= link_to "Daten ändern", edit_profil_path(@user_profile), class: "btn btn-primary" %>
-    <%= link_to "Finde einen Kumpel", findpal_path, class: "btn btn-secondary" %>
+    <%= link_to "Finde einen Kumpel", findpal_path, class: "btn btn-success" %>
   <% else %>
     <%= link_to "Neues Profil", new_profil_path, class: "btn btn-primary" %>
   <% end %>

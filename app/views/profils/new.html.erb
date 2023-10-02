@@ -1,10 +1,10 @@
-<h1>Enter your data here!</h1>
+<h1>Noch schnell das Formular ausfüllen ...</h1>
 
 <%= simple_form_for @profile do |f| %>
   <%= f.input :name %>
   <%= f.input :wohnort %>
     <%= f.simple_fields_for :interests do |i| %>
-    <%= i.input :name %>
+    <%= i.input :name, label: "Dein Hobby" %>
     <% end %>
-  <%= f.submit %>
+  <%= f.submit, class: "btn btn-success" %>
 <% end %>
