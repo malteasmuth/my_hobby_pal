@@ -4,9 +4,6 @@ class PalFinder
   end
 
   def find_pal
-    # Gibt einen zufälligen User aus dem Wohnort
-    # des angemeldeten Users zurück,
-    # dessen Interessen sich mit dem eigenen Nutzer überschneiden.
 
     all_interests = @current_profile.interests
     possible_pals = []
@@ -22,6 +19,7 @@ class PalFinder
       end
     end
 
+    # select for users at the same place
     same_place_profiles = possible_pals.select { |p| p.wohnort == @current_profile.wohnort}
 
     if same_place_profiles.empty? && possible_pals.empty?
