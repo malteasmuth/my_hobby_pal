@@ -2,7 +2,7 @@
   <%= f.input :name %>
   <%= f.input :wohnort %>
     <%= f.simple_fields_for :interests do |i| %>
-    <%= i.input :name %>
+    <%= i.input :name, label: "Füge ein Hobby hinzu" %>
     <% end %>
   <%= f.submit %>
 <% end %>
