@@ -2,7 +2,7 @@
   <%= f.input :name %>
   <%= f.input :wohnort %>
     <%= f.simple_fields_for :interests do |i| %>
-    <%= i.input :interest %>
+    <%= i.input :name %>
     <% end %>
   <%= f.submit %>
 <% end %>

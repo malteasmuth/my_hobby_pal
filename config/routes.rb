@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :profils
+  get "findpal", to: "pages#pal_finder"
   resources :interests
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
