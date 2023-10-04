@@ -4,30 +4,17 @@ class PalFinder
   end
 
   def find_pal
+    all_profile_interests = @current_profile.interests.pluck(:interest)
 
-    all_interests = @current_profile.interests
-    possible_pals = []
+    pal_profiles = Profil.joins(:interests)
+                         .where(interests: { interest: all_profile_interests })
+                         .where.not(id: @current_profile.id)
+                         .distinct
 
-    all_interests.each do |interest|
-      # all interest entries that do NOT belong to @user_profiles
-      interests = Interest.where(name: interest.name)
-                          .where.not(profil_id: @current_profile.id)
-      # all unique profiles
-      profiles = interests.collect{ |i| i.profil}.uniq
-      profiles.each do |profil|
-        possible_pals << profil
-      end
-    end
+    same_place_pals = pal_profiles.where(wohnort: @current_profile.wohnort)
+    return same_place_pals.sample unless same_place_pals.empty?
 
-    # select for users at the same place
-    same_place_profiles = possible_pals.select { |p| p.wohnort == @current_profile.wohnort}
-
-    if same_place_profiles.empty? && possible_pals.empty?
-      nil
-    elsif same_place_profiles.empty?
-      pal = possible_pals.sample
-    else
-      pal = same_place_profiles.sample
-    end
+    other_place_pals = pal_profiles.where.not(wohnort: @current_profile.wohnort)
+    other_place_pals.empty? ? nil : other_place_pals.sample
   end
 end

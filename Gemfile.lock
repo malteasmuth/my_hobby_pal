@@ -112,14 +112,16 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    ffi (1.16.2)
+    ffaker (2.23.0)
+    ffi (1.16.3-x64-mingw-ucrt)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
-    irb (1.7.4)
-      reline (>= 0.3.6)
+    irb (1.8.1)
+      rdoc
+      reline (>= 0.3.8)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -149,11 +151,13 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.4-x64-mingw-ucrt)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pg (1.5.4)
+    pg (1.5.4-x64-mingw-ucrt)
     popper_js (2.11.8)
+    psych (5.1.0)
+      stringio
     public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
@@ -192,8 +196,10 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rdoc (6.5.0)
+      psych (>= 4.0.0)
     regexp_parser (2.8.1)
-    reline (0.3.8)
+    reline (0.3.9)
       io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -241,11 +247,14 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    stringio (3.0.8)
     thor (1.2.2)
     tilt (2.3.0)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2023.3)
+      tzinfo (>= 1.0.0)
     vite_rails (3.0.16)
       railties (>= 5.1, < 8)
       vite_ruby (~> 3.0, >= 3.2.2)
@@ -273,7 +282,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  x86_64-linux
+  x64-mingw-ucrt
 
 DEPENDENCIES
   annotate
@@ -283,6 +292,7 @@ DEPENDENCIES
   debug
   devise
   factory_bot_rails
+  ffaker
   jbuilder
   name_of_person
   pg (~> 1.1)

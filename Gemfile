@@ -69,6 +69,7 @@ group :test do
   gem "webdrivers"
   gem "factory_bot_rails"
   gem "rspec-rails"
+  gem "ffaker"
 end
 gem "vite_rails"
 gem "vite_ruby"

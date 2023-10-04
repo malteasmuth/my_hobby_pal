@@ -1,47 +1,41 @@
 require 'rails_helper'
 
 describe PalFinder do
-  it "returns a user with same interests from same place" do
+  context "when there is another user with shared interest in the same place" do
+    let(:profile) { create(:profil, wohnort: 'Saarbrücken') }
+    let!(:user_interest) { create(:interest, interest: 'Schach', profil: profile) }
+    let(:matching_profile) { create(:profil,  wohnort: 'Saarbrücken') }
+    let!(:matching_interest) { create(:interest, interest: 'Schach', profil: matching_profile) }
 
-    user = create(:user)
-    profile = create(:current_profile)
-    user_interest = build(:interest, name: 'Schach', profil: profile).save
+    subject(:pal) { PalFinder.new(profile).find_pal }
 
-    pal_finder = PalFinder.new(profile)
-
-    pal = pal_finder.find_pal
-
-    puts "#{profile.name}, #{profile.wohnort}, #{profile.interests.last.name}"
-    puts "#{pal.name}, #{pal.wohnort}, #{pal.interests.last.name}"
-
-    expect(pal.name).to eq("Petra")
+    it "returns the found user" do
+      expect(pal.name).to eq(matching_profile.name)
+    end
   end
 
-  it "returns a user with same interests from other place" do
-    user = create(:other_user)
-    profile = build(:shares_interest_profile, name: "Hannelore", wohnort: "Saarbrücken", user: user)
-    user_interest = build(:interest, name: 'Schach', profil: profile).save
+  context "when there is a user with same interests from other place" do
+    let(:profile) { create(:profil, wohnort: 'Saarbrücken') }
+    let!(:user_interest) { create(:interest, interest: 'Schach', profil: profile) }
+    let(:matching_profile) { create(:profil,  wohnort: 'Köln') }
+    let!(:matching_interest) { create(:interest, interest: 'Schach', profil: matching_profile) }
 
-    pal_finder = PalFinder.new(profile)
+    subject(:pal) { PalFinder.new(profile).find_pal }
 
-    pal = pal_finder.find_pal
-    
-    puts "#{profile.name}, #{profile.wohnort}, #{profile.interests.last.name}"
-    puts "#{pal.name}, #{pal.wohnort}, #{pal.interests.last.name}"
-
-    expect(pal.name).to eq("Petra")
+    it "returns a user with same interests from other place" do
+      expect(pal.name).to eq(matching_profile.name)
+    end
   end
 
-  it "returns nil if there is no other user with shared interest in the system" do
+  context "when there is no other user with shared interest in the system" do
+    let(:user) { create(:lonely_user) }
+    let(:profile) { build(:shares_interest_profile, name: "Gert", wohnort: "Hamburg", user: user) }
+    let!(:user_interest) { build(:interest, interest: 'Falknerei', profil: profile).save }
 
-    user = create(:lonely_user)
-    profile = build(:shares_interest_profile, name: "Gert", wohnort: "Hamburg", user: user)
-    user_interest = build(:interest, name: 'Falknerei', profil: profile).save
+    subject(:pal_finder) { PalFinder.new(profile) }
 
-    puts "#{profile.name}, #{profile.wohnort}, #{profile.interests.last.name}"
-
-    pal_finder = PalFinder.new(profile)
-
-    expect(pal_finder.find_pal).to eq(nil)
+    it "returns nil" do
+      expect(pal_finder.find_pal).to eq(nil)
+    end
   end
 end
