@@ -29,8 +29,8 @@ describe PalFinder do
 
   context "when there is no other user with shared interest in the system" do
     let(:user) { create(:lonely_user) }
-    let(:profile) { build(:shares_interest_profile, name: "Gert", wohnort: "Hamburg", user: user) }
-    let!(:user_interest) { build(:interest, interest: 'Falknerei', profil: profile).save }
+    let(:profile) { create(:shares_interest_profile, name: "Gert", wohnort: "Hamburg", user: user) }
+    let!(:user_interest) { create(:interest, interest: 'Falknerei', profil: profile) }
 
     subject(:pal_finder) { PalFinder.new(profile) }
 
